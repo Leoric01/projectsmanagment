@@ -11,18 +11,18 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String content;
 
-    private LocalDateTime createdDateTime;
+    private LocalDateTime createdAt;
 
     @ManyToOne
-    private User user;
+    private Chat chat;
 
     @ManyToOne
-    private Issue issue;
+    private User sender;
 }
