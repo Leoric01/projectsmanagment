@@ -82,6 +82,8 @@ public class ProjectServiceImpl implements ProjectService {
         if (projectToDelete.getOwner().getId().equals(userId)) {
             projectRepository.delete(projectToDelete);
             log.info("seems like you are owner, project was deleted");
+        } else {
+            throw new BadCredentialsException("You are not owner of this project");
         }
     }
 
