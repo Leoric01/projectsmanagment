@@ -3,23 +3,26 @@ package com.leoric.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-import static com.leoric.config.JwtConstant.jwtExpiration;
-
+@Service
 public class JwtProvider {
-    static SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
-    @Value("${security.jwt.expiration-time}")
+    private final JwtConstant jwtConstant;
 
+    @Autowired
+    public JwtProvider(JwtConstant jwtConstant) {
+        this.jwtConstant = jwtConstant;
+    }
 
-    public static String generateToken(Authentication authentication) {
+    public String generateToken(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String authoritiesString = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
@@ -27,15 +30,42 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + jwtExpiration))
+                .setExpiration(new Date(new Date().getTime() + jwtConstant.getJwtExpiration())) // Use jwtExpiration
                 .claim("email", authentication.getName())
                 .claim("authorities", authoritiesString)
-                .signWith(key)
+                .signWith(getSecretKey(jwtConstant.getSecretKey()))
                 .compact();
     }
-    public static String getEmailFromToken(String token) {
-        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+
+    // Extract email from token
+    public String getEmailFromToken(String token) {
+        String resolvedToken = resolveToken(token);
+        SecretKey key = getSecretKey(jwtConstant.getSecretKey());
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(resolvedToken)
+                .getBody();
         return String.valueOf(claims.get("email"));
+
     }
 
+    // Optionally: Extract authorities from token
+    public String getAuthoritiesFromToken(String token) {
+        String resolvedToken = resolveToken(token);
+        SecretKey key = getSecretKey(jwtConstant.getSecretKey());
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(resolvedToken).getBody();
+        return String.valueOf(claims.get("authorities"));
+    }
+
+    private String resolveToken(String token) {
+        if (token != null && token.startsWith("Bearer ")) {
+            return token.substring(7); // Remove "Bearer " prefix
+        }
+        return token;
+    }
+
+    private SecretKey getSecretKey(String secretKey) {
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
+    }
 }

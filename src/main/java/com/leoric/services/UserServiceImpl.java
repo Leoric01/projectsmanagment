@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserProfileByJwt(String jwt) {
-        String email = JwtProvider.getEmailFromToken(jwt);
+        String email = jwtProvider.getEmailFromToken(jwt);
         return findUserByEmail(email);
     }
 

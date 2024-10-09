@@ -43,8 +43,7 @@ public class AuthController {
         User savedUser = userRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String jwt = JwtProvider.generateToken(userDetails);
+        String jwt = jwtProvider.generateToken(authentication);
         AuthResponse res = new AuthResponse();
         res.setToken(jwt);
         res.setMessage("signup successful");
@@ -57,7 +56,7 @@ public class AuthController {
         String password = loginRequest.getPassword();
         Authentication authentication = authenticate(username, password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = JwtProvider.generateToken(authentication);
+        String jwt = jwtProvider.generateToken(authentication);
         AuthResponse res = new AuthResponse();
         res.setToken(jwt);
         res.setMessage("login successful");

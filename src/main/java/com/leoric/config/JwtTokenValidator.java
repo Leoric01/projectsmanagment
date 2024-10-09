@@ -7,6 +7,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
@@ -22,7 +24,13 @@ import java.util.List;
 
 import static com.leoric.config.JwtConstant.JWT_HEADER;
 
+@Service
+@RequiredArgsConstructor
 public class JwtTokenValidator extends OncePerRequestFilter {
+
+    private final JwtConstant jwtConstant;
+
+
     @Override
     protected void doFilterInternal(
             @NotNull HttpServletRequest request,
@@ -32,7 +40,7 @@ public class JwtTokenValidator extends OncePerRequestFilter {
         if (jwt != null && jwt.startsWith("Bearer ")) {
             jwt = jwt.substring(7);
             try {
-                SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
+                SecretKey key = Keys.hmacShaKeyFor(jwtConstant.getSecretKey().getBytes());
                 Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
                 String email = String.valueOf(claims.get("email"));
                 String authorities = String.valueOf(claims.get("authorities"));
