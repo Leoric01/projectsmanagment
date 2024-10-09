@@ -2,15 +2,16 @@ package com.leoric.services;
 
 
 import com.leoric.models.Invitation;
+import jakarta.mail.MessagingException;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface InvitationService {
-    void sendInvitation(String targetEmail, Long projectId);
+    void sendInvitation(String targetEmail, Long projectId) throws MessagingException;
 
-    Invitation acceptInvitation(String targetEmail, Long projectId);
+    Invitation acceptInvitation(String targetEmail, Long userId) throws Exception;
 
-    String getTokenByUserMail(String userEmail);
+    String getTokenByUserMail(String userEmail) throws Exception;
 
     void deleteToken(String token);
 }
