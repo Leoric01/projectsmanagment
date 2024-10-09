@@ -27,6 +27,7 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final CustomUserDetailsImpl customUserDetails;
+    private final JwtProvider jwtProvider;
 
     @PostMapping("/signup")
     public ResponseEntity<?> createUserHandler(@RequestBody User user) {
@@ -42,7 +43,8 @@ public class AuthController {
         User savedUser = userRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = JwtProvider.generateToken(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String jwt = JwtProvider.generateToken(userDetails);
         AuthResponse res = new AuthResponse();
         res.setToken(jwt);
         res.setMessage("signup successful");
