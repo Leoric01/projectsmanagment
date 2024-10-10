@@ -23,6 +23,7 @@ public class IssueDTO {
     private Long projectID;
     private String priority;
     private LocalDateTime dueDate;
+    @Builder.Default
     private List<String> tags = new ArrayList<>();
     private Project project;
     private User assignee;

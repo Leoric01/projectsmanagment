@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getAllProjects() throws Exception {
-        return List.of();
+        return projectRepository.findAll();
     }
 
     @Override
@@ -124,5 +124,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Project> searchProjects(String keyword, User user) throws Exception {
         return projectRepository.findByNameContainingAndTeamContains(keyword, user);
+    }
+
+    @Override
+    public List<Project> getUsersProjects(Long userId) {
+        return projectRepository.findAll().stream()
+                .filter(x -> x.getOwner().getId().equals(userId))
+                .toList();
     }
 }

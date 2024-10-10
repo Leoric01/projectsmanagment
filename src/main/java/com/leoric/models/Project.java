@@ -22,7 +22,7 @@ public class Project {
     private String description;
     private String category;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> tags = new ArrayList<>();
 
     @JsonIgnore
@@ -32,9 +32,9 @@ public class Project {
     @ManyToOne
     private User owner;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Issue> issues = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> team = new ArrayList<>();
 }

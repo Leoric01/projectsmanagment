@@ -39,6 +39,15 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(projects);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Project>> getAllProjects(
+            @RequestHeader(JWT_HEADER) String jwt
+    ) throws Exception {
+        User user = userService.findUserProfileByJwt(jwt);
+        List<Project> project = projectService.getAllProjects();
+        return ResponseEntity.status(HttpStatus.OK).body(project);
+    }
+
     @GetMapping("/{projectId}")
     public ResponseEntity<Project> getProjectById(
             @RequestHeader(JWT_HEADER) String jwt,
@@ -47,6 +56,15 @@ public class ProjectController {
         User user = userService.findUserProfileByJwt(jwt);
         Project project = projectService.getProjectById(projectId);
         return ResponseEntity.status(HttpStatus.OK).body(project);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<Project>> getUsersProjects(
+            @RequestHeader(JWT_HEADER) String jwt
+    ) throws Exception {
+        User user = userService.findUserProfileByJwt(jwt);
+        List<Project> projects = projectService.getUsersProjects(user.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(projects);
     }
 
     @PostMapping

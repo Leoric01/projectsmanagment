@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    // USE TRANSACTIONAL INSTEAD EAGER IN CASE OF PERFORMANCE ISSUES
     public User findUserByEmail(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found"));

@@ -1,6 +1,7 @@
 package com.leoric.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,6 +25,7 @@ public class Issue {
     private LocalDateTime dueDate;
 
     @ElementCollection
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<String> tags = new ArrayList<>();
 
     @ManyToOne
@@ -34,6 +36,7 @@ public class Issue {
     private Project project;
 
     @JsonIgnore
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 

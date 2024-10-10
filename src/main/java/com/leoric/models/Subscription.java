@@ -16,7 +16,7 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate subscriptionStartDate;
-    private LocalDate getSubscriptionEnDate;
+    private LocalDate getSubscriptionEndDate;
     private PlanType planType;
     private boolean isValid;
     @OneToOne
