@@ -1,6 +1,7 @@
 package com.leoric.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,10 +27,12 @@ public class User {
     private String email;
     private int projectSize;
 
+    @JsonManagedReference
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Issue> assignedIssues = new ArrayList<>();
 
+    @JsonManagedReference
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Project> projects = new ArrayList<>();

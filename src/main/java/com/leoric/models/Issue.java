@@ -1,5 +1,6 @@
 package com.leoric.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
@@ -33,9 +34,11 @@ public class Issue {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<String> tags = new ArrayList<>();
 
+    @JsonBackReference
     @ManyToOne
     private User assignee;
 
+    @JsonBackReference
     @JsonIgnore
     @ManyToOne
     private Project project;
