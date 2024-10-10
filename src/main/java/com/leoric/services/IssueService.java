@@ -3,6 +3,7 @@ package com.leoric.services;
 import com.leoric.models.Issue;
 import com.leoric.models.User;
 import com.leoric.requests.IssueRequest;
+import com.leoric.response.DTOs.AllIssueDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,5 +31,5 @@ public interface IssueService {
 
     Issue updateStatus(Long issueId, String status) throws Exception;
 
-    List<Issue> getAllIssues();
+    List<AllIssueDTO> getAllIssues();
 }

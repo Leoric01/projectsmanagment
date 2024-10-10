@@ -1,6 +1,7 @@
 package com.leoric.controllers;
 
 import com.leoric.models.User;
+import com.leoric.response.DTOs.UserProfileResponseDTO;
 import com.leoric.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +21,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/profile")
-    public ResponseEntity<User> getUserProfile(
+    public ResponseEntity<UserProfileResponseDTO> getUserProfile(
             @RequestHeader(JWT_HEADER) String jwt
 
     ) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
-        return ResponseEntity.ok(user);
+        UserProfileResponseDTO userResponse = userService.getUserProfile(user);
+        return ResponseEntity.ok(userResponse);
     }
 }

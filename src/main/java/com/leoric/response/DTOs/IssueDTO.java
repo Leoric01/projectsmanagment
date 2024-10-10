@@ -1,9 +1,8 @@
-package com.leoric.response;
+package com.leoric.response.DTOs;
 
 import com.leoric.models.Project;
 import com.leoric.models.User;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +13,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class IssueDTO {
     private Long id;
     private String title;
@@ -23,7 +21,6 @@ public class IssueDTO {
     private Long projectID;
     private String priority;
     private LocalDate dueDate;
-    @Builder.Default
     private List<String> tags = new ArrayList<>();
     private Project project;
     private User assignee;

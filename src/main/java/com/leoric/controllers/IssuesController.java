@@ -1,6 +1,6 @@
 package com.leoric.controllers;
 
-import com.leoric.models.Issue;
+import com.leoric.response.DTOs.AllIssueDTO;
 import com.leoric.services.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class IssuesController {
     private final IssueService issueService;
 
     @GetMapping
-    public ResponseEntity<List<Issue>> getAllIssues(
+    public ResponseEntity<List<AllIssueDTO>> getAllIssues(
             @RequestHeader(JWT_HEADER) String jwt
     ) throws Exception {
         return ResponseEntity.ok(issueService.getAllIssues());

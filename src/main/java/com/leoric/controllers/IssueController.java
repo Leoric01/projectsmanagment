@@ -4,7 +4,7 @@ import com.leoric.models.Issue;
 import com.leoric.models.User;
 import com.leoric.requests.IssueRequest;
 import com.leoric.response.AuthResponse;
-import com.leoric.response.IssueDTO;
+import com.leoric.response.DTOs.IssueDTO;
 import com.leoric.services.IssueService;
 import com.leoric.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -43,18 +43,22 @@ public class IssueController {
         User tokenUser = userService.findUserProfileByJwt(jwt);
         User user = userService.findUserById(tokenUser.getId());
         Issue createdIssue = issueService.createIssue(issueReq, user);
-        IssueDTO issueDTO = IssueDTO.builder()
-                .id(createdIssue.getId())
-                .title(createdIssue.getTitle())
-                .description(createdIssue.getDescription())
-                .status(createdIssue.getStatus())
-                .projectID(createdIssue.getProject().getId())
-                .priority(createdIssue.getPriority())
-                .dueDate(createdIssue.getDueDate())
-                .tags(createdIssue.getTags())
-                .project(createdIssue.getProject())
-                .assignee(createdIssue.getAssignee())
-                .build();
+        IssueDTO issueDTO = new IssueDTO();
+        try {
+            issueDTO.setId(createdIssue.getId());
+            issueDTO.setTitle(createdIssue.getTitle());
+            issueDTO.setDescription(createdIssue.getDescription());
+            issueDTO.setStatus(createdIssue.getStatus());
+            issueDTO.setProjectID(createdIssue.getProject().getId());
+            issueDTO.setPriority(createdIssue.getPriority());
+            issueDTO.setDueDate(createdIssue.getDueDate());
+            issueDTO.setTags(createdIssue.getTags());
+            issueDTO.setProject(createdIssue.getProject());
+            issueDTO.setAssignee(createdIssue.getAssignee());
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
         return ResponseEntity.ok(issueDTO);
     }
 

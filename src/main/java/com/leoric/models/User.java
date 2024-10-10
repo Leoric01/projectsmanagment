@@ -28,7 +28,6 @@ public class User {
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JsonIgnore
     private List<Issue> assignedIssues = new ArrayList<>();
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)

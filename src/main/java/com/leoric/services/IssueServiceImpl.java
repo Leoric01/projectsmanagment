@@ -5,6 +5,8 @@ import com.leoric.models.Project;
 import com.leoric.models.User;
 import com.leoric.repositories.IssueRepository;
 import com.leoric.requests.IssueRequest;
+import com.leoric.response.DTOs.AllIssueDTO;
+import com.leoric.response.DTOs.UserResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -91,7 +93,32 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public List<Issue> getAllIssues() {
-        return issueRepository.findAll();
+    public List<AllIssueDTO> getAllIssues() {
+        List<Issue> issues = issueRepository.findAll();
+        return issues.stream()
+                .map(issue -> {
+                    AllIssueDTO issueDto = new AllIssueDTO();
+                    issueDto.setId(issue.getId());
+                    issueDto.setTitle(issue.getTitle());
+                    issueDto.setDescription(issue.getDescription());
+                    issueDto.setStatus(issue.getStatus());
+                    issueDto.setPriority(issue.getPriority());
+                    issueDto.setDueDate(issue.getDueDate());
+                    issueDto.setCreatedDate(issue.getCreated());
+                    issueDto.setProjectID(issue.getProject() != null ? issue.getProject().getId() : null);
+                    issueDto.setProjectName(issue.getProject() != null ? issue.getProject().getName() : null);
+                    issueDto.setTags(issue.getTags());
+                    if (issue.getAssignee() != null) {
+                        User assignee = issue.getAssignee();
+                        UserResponseDTO assigneeDto = new UserResponseDTO();
+                        assigneeDto.setId(assignee.getId());
+                        assigneeDto.setUsername(assignee.getFullName());
+                        issueDto.setAssignee(assigneeDto);
+                    } else {
+                        issueDto.setAssignee(null);
+                    }
+                    return issueDto;
+                })
+                .toList();
     }
 }

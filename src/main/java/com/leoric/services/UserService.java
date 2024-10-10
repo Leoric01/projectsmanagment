@@ -1,6 +1,7 @@
 package com.leoric.services;
 
 import com.leoric.models.User;
+import com.leoric.response.DTOs.UserProfileResponseDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,4 +13,6 @@ public interface UserService {
     User findUserById(Long userId) throws Exception;
 
     User updateUsersProjectSize(User user, int number) throws Exception;
+
+    UserProfileResponseDTO getUserProfile(User user);
 }
