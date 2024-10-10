@@ -37,7 +37,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(Long userId) throws BadCredentialsException {
-        return userRepository.findById(userId).orElseThrow(() -> new BadCredentialsException("id not found in db"));
+        return userRepository.findById(userId).orElseThrow(
+                () -> new BadCredentialsException("id not found in db"));
     }
 
     @Override

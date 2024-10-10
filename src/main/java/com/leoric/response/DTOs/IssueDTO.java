@@ -1,7 +1,6 @@
 package com.leoric.response.DTOs;
 
 import com.leoric.models.Project;
-import com.leoric.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +22,6 @@ public class IssueDTO {
     private LocalDate dueDate;
     private List<String> tags = new ArrayList<>();
     private Project project;
-    private User assignee;
+    private UserResponseDTO assignee;
 
 }

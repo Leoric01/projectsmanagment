@@ -33,7 +33,7 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public List<Issue> getIssueByProjectId(Long projectId) throws Exception {
+    public List<Issue> getIssuesByProjectId(Long projectId) throws Exception {
         return issueRepository.findByProjectId(projectId);
     }
 
@@ -109,10 +109,7 @@ public class IssueServiceImpl implements IssueService {
                     issueDto.setProjectName(issue.getProject() != null ? issue.getProject().getName() : null);
                     issueDto.setTags(issue.getTags());
                     if (issue.getAssignee() != null) {
-                        User assignee = issue.getAssignee();
-                        UserResponseDTO assigneeDto = new UserResponseDTO();
-                        assigneeDto.setId(assignee.getId());
-                        assigneeDto.setUsername(assignee.getFullName());
+                        UserResponseDTO assigneeDto = issue.getAssignee();
                         issueDto.setAssignee(assigneeDto);
                     } else {
                         issueDto.setAssignee(null);

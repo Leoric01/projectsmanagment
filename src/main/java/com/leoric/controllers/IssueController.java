@@ -31,7 +31,7 @@ public class IssueController {
     @GetMapping("/project/{projectId}")
     public ResponseEntity<List<Issue>> getIssueByProjectId(@PathVariable Long projectId)
             throws Exception {
-        return ResponseEntity.ok(issueService.getIssueByProjectId(projectId));
+        return ResponseEntity.ok(issueService.getIssuesByProjectId(projectId));
     }
 
     @PostMapping

@@ -3,8 +3,11 @@ package com.leoric.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.leoric.response.DTOs.UserResponseDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,6 +17,8 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +39,6 @@ public class Issue {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<String> tags = new ArrayList<>();
 
-    @JsonBackReference
     @ManyToOne
     private User assignee;
 
@@ -47,4 +51,11 @@ public class Issue {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    public UserResponseDTO getAssignee() {
+        if (this.assignee != null) {
+            return new UserResponseDTO(assignee.getId(), assignee.getFullName());
+        }
+        return null;
+    }
 }
