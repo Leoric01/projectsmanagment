@@ -32,7 +32,7 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public List<Issue> getIssueByProjectId(Long projectId) throws Exception {
-        return List.of();
+        return issueRepository.findByProjectId(projectId);
     }
 
     @Override
@@ -56,7 +56,6 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public void deleteIssue(Long issueId, Long userId) throws Exception {
-        //TODO check if deleter is owner
         getIssueById(issueId);
         issueRepository.deleteById(issueId);
     }
@@ -89,5 +88,10 @@ public class IssueServiceImpl implements IssueService {
         Issue issue = getIssueById(issueId);
         issue.setStatus(status);
         return issueRepository.save(issue);
+    }
+
+    @Override
+    public List<Issue> getAllIssues() {
+        return issueRepository.findAll();
     }
 }

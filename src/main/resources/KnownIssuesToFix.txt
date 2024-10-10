@@ -1,0 +1,7 @@
+/search - dava jen pokud je user team member nebo owner. Asi predelat, pridat boolean isProjectPublic
+stripe - nej rozchodit
+fetch EAGER - nastudovat jestli nepouzit radsi @Transactional
+swagger - nefunguje?  404, nedava ani prazdnou basic stranku
+get issue by project id - muze zobrazit kdokoliv, predelat + asi vyhodit exception kdyz prazdnej list s nejakou hlaskou
+/delete issue - check if deleter has authority (is owner, or mby admin role in User or moderator, or role editor/admin as a team member)
+

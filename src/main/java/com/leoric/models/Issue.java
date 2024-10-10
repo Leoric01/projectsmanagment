@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +23,13 @@ public class Issue {
     private String priority;
 
     private Long projectID;
-    private LocalDateTime created;
-    private LocalDateTime dueDate;
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDate created = LocalDate.now();
+    @LastModifiedDate
+    private LocalDate dueDate;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<String> tags = new ArrayList<>();
 

@@ -123,7 +123,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> searchProjects(String keyword, User user) throws Exception {
-        return projectRepository.findByNameContainingAndTeamContains(keyword, user);
+        List<Project> projects = projectRepository.findByNameContainingAndTeamContains(keyword, user);
+        if (projects.isEmpty()) {
+            throw new Exception("No projects found for the user: " + user.getFullName());
+        }
+        return projects;
     }
 
     @Override

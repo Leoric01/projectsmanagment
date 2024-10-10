@@ -77,18 +77,18 @@ public class IssueController {
             @PathVariable Long userId,
             @RequestHeader(JWT_HEADER) String jwt
     ) throws Exception {
-        User tokenUser = userService.findUserProfileByJwt(jwt);
+        User user = userService.findUserProfileByJwt(jwt);
         Issue issue = issueService.addUserToIssue(issueId, userId);
         return ResponseEntity.ok(issue);
     }
 
-    @PutMapping("/{issueId}/assignee/{status}")
+    @PutMapping("/{issueId}/")
     public ResponseEntity<Issue> updateIssueStatus(
-            @PathVariable String status,
+            @RequestParam String status,
             @PathVariable Long issueId,
             @RequestHeader(JWT_HEADER) String jwt
     ) throws Exception {
-        User tokenUser = userService.findUserProfileByJwt(jwt);
+        User user = userService.findUserProfileByJwt(jwt);
         Issue issue = issueService.updateStatus(issueId, status);
         return ResponseEntity.ok(issue);
     }
