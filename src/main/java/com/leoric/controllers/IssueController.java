@@ -67,9 +67,8 @@ public class IssueController {
             @PathVariable Long issueId,
             @RequestHeader(JWT_HEADER) String jwt
     ) throws Exception {
-        User tokenUser = userService.findUserProfileByJwt(jwt);
-        User user = userService.findUserById(tokenUser.getId());
-        issueService.deleteIssue(issueId, user.getId());
+        User user = userService.findUserProfileByJwt(jwt);
+        issueService.deleteIssue(issueId);
         AuthResponse res = new AuthResponse();
         res.setMessage("Issue deleted");
         return ResponseEntity.ok(res);

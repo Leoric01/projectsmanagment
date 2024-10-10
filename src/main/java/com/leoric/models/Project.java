@@ -1,22 +1,26 @@
 package com.leoric.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+@Setter
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false, updatable = false)
     private Long id;
 
     private String name;
@@ -33,10 +37,39 @@ public class Project {
     @ManyToOne
     private User owner;
 
-    @JsonBackReference
+    @Getter
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Issue> issues = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<User> team = new ArrayList<>();
+    @JoinTable(
+            name = "project_team_members",
+            joinColumns = {@JoinColumn(name = "project_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<User> teamMembers = new HashSet<>();
+
+    public Set<User> getTeamMembers() {
+        Set<User> users = new HashSet<>(this.teamMembers);
+        users.remove(this.owner);
+        return users;
+    }
+
+    public Chat getChat() {
+        if (chat == null) {
+            return new Chat();
+        }
+        return chat;
+    }
+
+    public void addTeamMember(User user) {
+        this.teamMembers.add(user);
+        user.getProjects().add(this);
+    }
+
+    public void removeTeamMember(User user) {
+        this.teamMembers.remove(user);
+        user.getProjects().remove(this);
+    }
+
 }

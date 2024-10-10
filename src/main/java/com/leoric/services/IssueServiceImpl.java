@@ -7,6 +7,7 @@ import com.leoric.repositories.IssueRepository;
 import com.leoric.requests.IssueRequest;
 import com.leoric.response.DTOs.AllIssueDTO;
 import com.leoric.response.DTOs.UserResponseDTO;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -57,9 +58,17 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public void deleteIssue(Long issueId, Long userId) throws Exception {
-        getIssueById(issueId);
-        issueRepository.deleteById(issueId);
+    @Transactional
+    public void deleteIssue(Long id, Long userId) throws Exception {
+        issueRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteIssue(Long issueId) throws Exception {
+        Issue issue = getIssueById(issueId);
+        issueRepository.delete(issue);
+//        issueRepository.deleteById(issueId);
     }
 
     @Override

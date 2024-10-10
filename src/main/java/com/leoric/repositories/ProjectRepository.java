@@ -11,7 +11,8 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-    @Query("SELECT p FROM Project p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :partialName, '%')) AND :user MEMBER OF p.team")
-    List<Project> findByNameContainingAndTeamContains(@Param("partialName") String partialName, @Param("user") User user);
-    List<Project> findByTeamContainingOrOwner(User user, User oner);
+    @Query("SELECT p FROM Project p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :partialName, '%')) AND :user MEMBER OF p.teamMembers")
+    List<Project> findByNameContainingAndTeamMembersContains(@Param("partialName") String partialName, @Param("user") User user);
+
+    List<Project> findByTeamMembersContainingOrOwner(User user, User oner);
 }

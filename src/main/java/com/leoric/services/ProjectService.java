@@ -3,6 +3,7 @@ package com.leoric.services;
 import com.leoric.models.Chat;
 import com.leoric.models.Project;
 import com.leoric.models.User;
+import com.leoric.response.DTOs.ChatResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,4 +33,8 @@ public interface ProjectService {
     List<Project> searchProjects(String keyword, User user) throws Exception;
 
     List<Project> getUsersProjects(Long userId);
+
+    ChatResponseDto getChatResponseDtoByProjectId(Long projectId) throws Exception;
+
+    Project addNewTeamMember(Long projectId, Long newMemberUserId) throws Exception;
 }

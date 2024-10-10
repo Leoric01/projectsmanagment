@@ -1,7 +1,7 @@
 package com.leoric.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,6 +18,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false, updatable = false)
     private Long id;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -27,13 +28,25 @@ public class User {
     private String email;
     private int projectSize;
 
-    @JsonManagedReference
+    //    @JsonManagedReference
+    @JsonIgnore
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Issue> assignedIssues = new ArrayList<>();
 
-    @JsonManagedReference
+    //    @JsonManagedReference
+    @JsonIgnore
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "teamMembers", fetch = FetchType.EAGER)
     private List<Project> projects = new ArrayList<>();
+
+    public void addProject(Project project) {
+        this.projects.add(project);
+        project.getTeamMembers().add(this);
+    }
+
+    public void removeProject(Project project) {
+        this.projects.remove(project);
+        project.getTeamMembers().remove(this);
+    }
 }

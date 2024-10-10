@@ -21,6 +21,8 @@ public interface IssueService {
 
     void deleteIssue(Long issueId, Long userId) throws Exception;
 
+    void deleteIssue(Long issueId) throws Exception;
+
     List<Issue> getIssuesByAssigneeId(Long assigneeId) throws Exception;
 
     List<Issue> searchIssue(String title, String status, String priority, Long assigneeId) throws Exception;

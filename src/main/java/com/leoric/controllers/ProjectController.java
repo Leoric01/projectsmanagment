@@ -1,10 +1,10 @@
 package com.leoric.controllers;
 
-import com.leoric.models.Chat;
 import com.leoric.models.Invitation;
 import com.leoric.models.Project;
 import com.leoric.models.User;
 import com.leoric.requests.InviteRequest;
+import com.leoric.response.DTOs.ChatResponseDto;
 import com.leoric.response.MessageResponse;
 import com.leoric.services.InvitationService;
 import com.leoric.services.ProjectService;
@@ -28,6 +28,16 @@ public class ProjectController {
     private final UserService userService;
     private final InvitationService invitationService;
 
+    @PatchMapping("/add/{projectId}/")
+    public ResponseEntity<Project> addUserToProjectByUserId(
+            @RequestHeader(JWT_HEADER) String jwt,
+            @PathVariable Long projectId,
+            @RequestParam Long newMemberId
+    ) throws Exception {
+        User user = userService.findUserProfileByJwt(jwt);
+        Project updatedProject = projectService.addNewTeamMember(projectId, newMemberId);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedProject);
+    }
     @GetMapping
     public ResponseEntity<List<Project>> getAllProjects(
             @RequestParam(required = false) String category,
@@ -88,6 +98,7 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.OK).body(createdProject);
     }
 
+
     @DeleteMapping("/{projectId}")
     public ResponseEntity<MessageResponse> deleteProject(
             @RequestHeader(JWT_HEADER) String jwt,
@@ -110,12 +121,12 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectId}/chat")
-    public ResponseEntity<Chat> getChatByProjectId(
+    public ResponseEntity<ChatResponseDto> getChatByProjectId(
             @RequestHeader(JWT_HEADER) String jwt,
             @PathVariable Long projectId
     ) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
-        Chat chat = projectService.getChatByProjectId(projectId);
+        ChatResponseDto chat = projectService.getChatResponseDtoByProjectId(projectId);
         return ResponseEntity.status(HttpStatus.OK).body(chat);
     }
 

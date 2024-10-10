@@ -1,6 +1,5 @@
 package com.leoric.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.leoric.response.DTOs.UserResponseDTO;
@@ -30,7 +29,6 @@ public class Issue {
 
     private Long projectID;
     @CreatedDate
-    @Column(updatable = false)
     private LocalDate created = LocalDate.now();
     @LastModifiedDate
     private LocalDate dueDate;
@@ -42,7 +40,6 @@ public class Issue {
     @ManyToOne
     private User assignee;
 
-    @JsonBackReference
     @JsonIgnore
     @ManyToOne
     private Project project;
@@ -54,7 +51,7 @@ public class Issue {
 
     public UserResponseDTO getAssignee() {
         if (this.assignee != null) {
-            return new UserResponseDTO(assignee.getId(), assignee.getFullName());
+            return new UserResponseDTO(assignee.getId(), assignee.getFullName(), assignee.getEmail());
         }
         return null;
     }

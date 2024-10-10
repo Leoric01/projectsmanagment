@@ -29,7 +29,7 @@ public class AuthController {
     private final CustomUserDetailsImpl customUserDetails;
     private final JwtProvider jwtProvider;
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> createUserHandler(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return ResponseEntity

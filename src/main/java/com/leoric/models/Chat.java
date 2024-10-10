@@ -21,12 +21,14 @@ public class Chat {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Message> messages;
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Message> messages = new ArrayList<>();
 
     @OneToOne
+    @JsonIgnore
     private Project project;
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 }
