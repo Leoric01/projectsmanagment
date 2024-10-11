@@ -46,7 +46,7 @@ public class Issue {
 
     @JsonIgnore
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Comment> comments = new ArrayList<>();
 
     public UserResponseDTO getAssignee() {
@@ -54,5 +54,9 @@ public class Issue {
             return new UserResponseDTO(assignee.getId(), assignee.getFullName(), assignee.getEmail());
         }
         return null;
+    }
+
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
     }
 }

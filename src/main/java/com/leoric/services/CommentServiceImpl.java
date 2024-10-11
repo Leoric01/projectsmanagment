@@ -22,19 +22,25 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteComment(Long commentId, Long userId) throws Exception {
-        Optional<Comment> comment = commentRepository.findById(commentId);
-        if (comment.isEmpty()) {
+        Optional<Comment> commentOpt = commentRepository.findById(commentId);
+        if (commentOpt.isEmpty()) {
             throw new Exception("comment not found with id " + commentId);
         }
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isEmpty()) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
             throw new Exception("user not found with id " + userId);
         }
-        if (comment.get().getUser().equals(user.get())) {
+        Comment comment = commentOpt.get();
+        User user = userOpt.get();
+        if (comment.getUser().getId().equals(user.getId())) {
             commentRepository.deleteById(commentId);
         } else {
             throw new Exception("comment not deleted with id " + commentId);
         }
+        Issue issue = comment.getIssue();
+        issue.removeComment(comment);
+        issueRepository.save(issue);
+        commentRepository.delete(comment);
     }
 
     @Override
