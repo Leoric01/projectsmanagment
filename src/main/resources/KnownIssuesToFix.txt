@@ -7,3 +7,4 @@ get issue by project id - muze zobrazit kdokoliv, predelat + asi vyhodit excepti
 /deleteissuebyid - DOESN'T WORK AT ALL
 everywhere i get infinite loops when fetching entity, cause they all contain another. Gotta swap for custom dtos, cry in corner
 addNewTeamMemer() in Project doesn't work, study on bidirectional relationship / SOLVED
+/confirm password on frontend solve, swap already have and account and login text in swapper
