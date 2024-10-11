@@ -168,7 +168,9 @@ public class ProjectServiceImpl implements ProjectService {
             throw new Exception("No chat usesr or messages found for project with id: " + projectId);
         }
         Chat chat = project.getChat();
-        List<UserResponseDTO> userDtos = mapUsersToDTO(project.getTeamMembers());
+        Set<User> users = project.getTeamMembers();
+        users.add(project.getOwner());
+        List<UserResponseDTO> userDtos = mapUsersToDTO(users);
         List<MessageResponseDTO> messagesDtos = mapMessagesToDTO(chat.getMessages());
         return new ChatResponseDto(
                 chat.getId(),

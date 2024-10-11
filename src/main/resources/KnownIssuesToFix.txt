@@ -6,4 +6,4 @@ get issue by project id - muze zobrazit kdokoliv, predelat + asi vyhodit excepti
 /delete issue - check if deleter has authority (is owner, or mby admin role in User or moderator, or role editor/admin as a team member)
 /deleteissuebyid - DOESN'T WORK AT ALL
 everywhere i get infinite loops when fetching entity, cause they all contain another. Gotta swap for custom dtos, cry in corner
-addNewTeamMemer() in Project doesn't work, study on bidirectional relationship
+addNewTeamMemer() in Project doesn't work, study on bidirectional relationship / SOLVED
