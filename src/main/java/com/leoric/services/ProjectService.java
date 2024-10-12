@@ -37,4 +37,10 @@ public interface ProjectService {
     ChatResponseDto getChatResponseDtoByProjectId(Long projectId) throws Exception;
 
     Project addNewTeamMember(Long projectId, Long newMemberUserId) throws Exception;
+    List<Project> searchProjectsByAllCategories(String keyword, User user) throws Exception;
+
+    List<Project> searchProjectsByNamesOnly(String keyword, User user) throws Exception;
+    List<Project> searchProjectsByNamesDescriptionTagsCategoryTeamMemebersNames(String keyword) throws Exception;
+    List<Project> SearchProjectsByUsers(String keyword, User user) throws Exception;
+
 }

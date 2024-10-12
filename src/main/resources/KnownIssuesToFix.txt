@@ -9,3 +9,4 @@ everywhere i get infinite loops when fetching entity, cause they all contain ano
 addNewTeamMemer() in Project doesn't work, study on bidirectional relationship / SOLVED
 /confirm password on frontend solve, swap already have and account and login text in swapper
 pridat issue update, jde jen zmenit status nebo asigne so far
+nefunguje filtr category a tags na hlavni strrance UPDATE uz funguje ale je potreba doladit

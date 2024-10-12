@@ -123,6 +123,42 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Project> searchProjectsByAllCategories(String keyword, User user) throws Exception {
+        return List.of();
+    }
+
+    @Override
+    public List<Project> searchProjectsByNamesOnly(String keyword, User user) throws Exception {
+        return List.of();
+    }
+
+    @Override
+    public List<Project> searchProjectsByNamesDescriptionTagsCategoryTeamMemebersNames(String keyword) throws Exception {
+        final String keywordLowerCase = keyword.toLowerCase();
+
+        return projectRepository.findAll().stream()
+                .filter(project ->
+                        (project.getName() != null && project.getName().toLowerCase().contains(keywordLowerCase)) ||
+                        (project.getDescription() != null && project.getDescription().toLowerCase().contains(keywordLowerCase)) ||
+                        (project.getCategory() != null && project.getCategory().toLowerCase().contains(keywordLowerCase)) ||
+                        (project.getOwner() != null && project.getOwner().getFullName() != null &&
+                         project.getOwner().getFullName().toLowerCase().contains(keywordLowerCase)) ||
+                        (project.getTags() != null && project.getTags().stream()
+                                .anyMatch(tag -> tag != null && tag.toLowerCase().contains(keywordLowerCase)) ||
+                         (project.getTeamMembers() != null && project.getTeamMembers().stream()
+                                 .anyMatch(user -> user.getFullName() != null &&
+                                                   user.getFullName().toLowerCase().contains(keywordLowerCase))
+                         )
+                        )
+                ).toList();
+    }
+
+    @Override
+    public List<Project> SearchProjectsByUsers(String keyword, User user) throws Exception {
+        return List.of();
+    }
+
+    @Override
     public void removeUserFromProject(Long projectId, Long userId) throws Exception {
         Project project = getProjectById(projectId);
         User user = userService.findUserById(userId);

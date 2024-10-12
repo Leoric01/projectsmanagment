@@ -21,10 +21,11 @@ public class User {
     @Column(unique = true, nullable = false, updatable = false)
     private Long id;
 
+    private String fullName;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private String fullName;
     private String email;
     private int projectSize;
 

@@ -38,7 +38,7 @@ public class ProjectController {
         Project updatedProject = projectService.addNewTeamMember(projectId, newMemberId);
         return ResponseEntity.status(HttpStatus.OK).body(updatedProject);
     }
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Project>> getAllProjects(
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String tag,
@@ -56,6 +56,17 @@ public class ProjectController {
         User user = userService.findUserProfileByJwt(jwt);
         List<Project> project = projectService.getAllProjects();
         return ResponseEntity.status(HttpStatus.OK).body(project);
+    }
+
+    @GetMapping("/search/all")
+    public ResponseEntity<List<Project>> getAllProjectsByKeyWord(
+            @RequestParam String keyword,
+            @RequestHeader(JWT_HEADER) String jwt) throws Exception {
+        List<Project> projects = projectService.searchProjectsByNamesDescriptionTagsCategoryTeamMemebersNames(keyword);
+        if (projects.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(projects);
     }
 
     @GetMapping("/{projectId}")
