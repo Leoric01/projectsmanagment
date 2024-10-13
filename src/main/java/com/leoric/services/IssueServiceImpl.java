@@ -44,13 +44,33 @@ public class IssueServiceImpl implements IssueService {
     public Issue createIssue(IssueRequest issueRequest, User user) throws Exception {
         Project project = projectService.getProjectById(issueRequest.getProjectId());
         Issue newIssue = new Issue();
-        newIssue.setTitle(issueRequest.getTitle());
-        newIssue.setDescription(issueRequest.getDescription());
-        newIssue.setStatus(issueRequest.getStatus());
-        newIssue.setProjectID(issueRequest.getProjectId());
-        newIssue.setDueDate(issueRequest.getDueDate());
-        newIssue.setPriority(issueRequest.getPriority());
+
+        if (issueRequest.getTitle() != null && !issueRequest.getTitle().isBlank()) {
+            newIssue.setTitle(issueRequest.getTitle());
+        }
+
+        if (issueRequest.getDescription() != null && !issueRequest.getDescription().isBlank()) {
+            newIssue.setDescription(issueRequest.getDescription());
+        }
+
+        if (issueRequest.getStatus() != null && !issueRequest.getStatus().isBlank()) {
+            newIssue.setStatus(issueRequest.getStatus());
+        }
+
+        if (issueRequest.getProjectId() != null) {
+            newIssue.setProjectID(issueRequest.getProjectId());
+        }
+
+        if (issueRequest.getDueDate() != null) {
+            newIssue.setDueDate(issueRequest.getDueDate());
+        }
+
+        if (issueRequest.getPriority() != null) {
+            newIssue.setPriority(issueRequest.getPriority());
+        }
+
         newIssue.setProject(project);
+
         return issueRepository.save(newIssue);
     }
 
@@ -133,4 +153,14 @@ public class IssueServiceImpl implements IssueService {
                 })
                 .toList();
     }
+//    private void setIfNotEmpty(Consumer<String> setter, String value) {
+//        if (value != null && !value.isBlank()) {
+//            setter.accept(value);
+//        }
+//    }
+//    private <T> void setIfNotNull(Consumer<T> setter, T value) {
+//        if (value != null) {
+//            setter.accept(value);
+//        }
+//    }
 }

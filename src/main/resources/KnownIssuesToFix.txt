@@ -14,5 +14,9 @@ nejede swagger, 404
 
 
 FE
+/ProjectDetails useEffect intellij hazi chybu, apka funguje
+/delete issue v project detailu - smaze issue ale je potreba manualne f5 aby se ukazalo
+/update issue status v issue detail - updatne, napise loading misto reset s datama
 /prtava icona v navbaru a kdyz je jmeno na 2 radky tak retardovane roztazena
 nefunguje filtr category a tags na hlavni strrance /EDIT uz funguje ale je potreba doladit
+/issue sort by status

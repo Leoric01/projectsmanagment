@@ -24,7 +24,7 @@ public class Issue {
     private Long id;
     private String title;
     private String description;
-    private String status;
+    private String status = "todo";
     private String priority;
 
     private Long projectID;
