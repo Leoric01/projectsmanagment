@@ -14,5 +14,5 @@ pridat issue update, jde jen zmenit status nebo asigne so far
 
 
 FE
-/
+/prtava icona v navbaru a kdyz je jmeno na 2 radky tak retardovane roztazena
 nefunguje filtr category a tags na hlavni strrance /EDIT uz funguje ale je potreba doladit
