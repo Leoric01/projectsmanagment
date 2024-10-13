@@ -5,7 +5,7 @@ swagger - nefunguje?  404, nedava ani prazdnou basic stranku
 get issue by project id - muze zobrazit kdokoliv, predelat + asi vyhodit exception kdyz prazdnej list s nejakou hlaskou
 /delete issue - check if deleter has authority (is owner, or mby admin role in User or moderator, or role editor/admin as a team member)
 pridat issue update, jde jen zmenit status nebo asigne so far
-
+nejede swagger, 404
 
 / SOLVED/ everywhere i get infinite loops when fetching entity, cause they all contain another /SOLVED i guess, would require to test all services
 / SOLVED / confirm password on frontend solved, swap already have and account and login text in swapper
