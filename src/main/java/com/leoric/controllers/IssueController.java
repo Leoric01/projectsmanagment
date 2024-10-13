@@ -40,9 +40,12 @@ public class IssueController {
             @RequestHeader(JWT_HEADER) String jwt
     ) throws Exception {
         System.out.println("issue-----" + issueReq);
-        User tokenUser = userService.findUserProfileByJwt(jwt);
-        User user = userService.findUserById(tokenUser.getId());
+        User user = userService.findUserProfileByJwt(jwt);
         Issue createdIssue = issueService.createIssue(issueReq, user);
+        if (createdIssue == null || issueReq.getTitle() == null || issueReq.getTitle().isBlank()) {
+            throw new IllegalArgumentException("Title is required");
+        }
+
         IssueDTO issueDTO = new IssueDTO();
         try {
             issueDTO.setId(createdIssue.getId());

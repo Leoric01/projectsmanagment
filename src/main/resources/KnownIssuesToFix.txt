@@ -4,9 +4,15 @@ fetch EAGER - nastudovat jestli nepouzit radsi @Transactional
 swagger - nefunguje?  404, nedava ani prazdnou basic stranku
 get issue by project id - muze zobrazit kdokoliv, predelat + asi vyhodit exception kdyz prazdnej list s nejakou hlaskou
 /delete issue - check if deleter has authority (is owner, or mby admin role in User or moderator, or role editor/admin as a team member)
-/deleteissuebyid - DOESN'T WORK AT ALL
-everywhere i get infinite loops when fetching entity, cause they all contain another. Gotta swap for custom dtos, cry in corner
-addNewTeamMemer() in Project doesn't work, study on bidirectional relationship / SOLVED
-/confirm password on frontend solve, swap already have and account and login text in swapper
 pridat issue update, jde jen zmenit status nebo asigne so far
-nefunguje filtr category a tags na hlavni strrance UPDATE uz funguje ale je potreba doladit
+
+
+/ SOLVED/ everywhere i get infinite loops when fetching entity, cause they all contain another /SOLVED i guess, would require to test all services
+/ SOLVED / confirm password on frontend solved, swap already have and account and login text in swapper
+/ SOLVED / addNewTeamMemer() in Project doesn't work, study on bidirectional relationship
+/ SOLVED /deleteissuebyid - DOESN'T WORK AT ALL
+
+
+FE
+/
+nefunguje filtr category a tags na hlavni strrance /EDIT uz funguje ale je potreba doladit

@@ -4,6 +4,7 @@ import com.leoric.models.Issue;
 import com.leoric.models.Project;
 import com.leoric.models.User;
 import com.leoric.repositories.IssueRepository;
+import com.leoric.repositories.ProjectRepository;
 import com.leoric.requests.IssueRequest;
 import com.leoric.response.DTOs.AllIssueDTO;
 import com.leoric.response.DTOs.UserResponseDTO;
@@ -23,6 +24,7 @@ public class IssueServiceImpl implements IssueService {
     private final IssueRepository issueRepository;
     private final ProjectService projectService;
     private final UserService userService;
+    private final ProjectRepository projectRepository;
 
     @Override
     public Issue getIssueById(Long issueId) throws Exception {
@@ -64,11 +66,15 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    @Transactional
     public void deleteIssue(Long issueId) throws Exception {
         Issue issue = getIssueById(issueId);
+        Project project = issue.getProject();
+        if (project != null) {
+            project.removeIssue(issue);
+        }
+        assert project != null;
+        projectRepository.save(project);
         issueRepository.delete(issue);
-//        issueRepository.deleteById(issueId);
     }
 
     @Override

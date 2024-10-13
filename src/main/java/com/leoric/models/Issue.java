@@ -56,6 +56,7 @@ public class Issue {
         return null;
     }
 
+
     public void removeComment(Comment comment) {
         comments.remove(comment);
     }

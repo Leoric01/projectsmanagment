@@ -34,9 +34,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project createProject(Project project, User user) throws Exception {
         Project createdProject = new Project();
+        if (project.getName() == null || project.getName().isEmpty()) {
+            throw new BadCredentialsException("Project name cannot be empty");
+        }
         createdProject.setOwner(user);
-        createdProject.setTags(project.getTags());
         createdProject.setName(project.getName());
+        createdProject.setTags(project.getTags());
         createdProject.setDescription(project.getDescription());
         createdProject.setCategory(project.getCategory());
         createdProject.getTeamMembers().add(user);

@@ -26,6 +26,8 @@ public class Project {
     private String name;
     private String description;
     private String category;
+    private String status = "Just Created";
+    private String deployedUrl;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> tags = new ArrayList<>();
@@ -47,7 +49,13 @@ public class Project {
             joinColumns = {@JoinColumn(name = "project_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
+
     private Set<User> teamMembers = new HashSet<>();
+
+    public void removeIssue(Issue issue) {
+        this.issues.remove(issue);
+        issue.setProject(null); // Ensure that issue's reference to project is cleared
+    }
 
     public Set<User> getTeamMembers() {
         Set<User> users = new HashSet<>(this.teamMembers);
@@ -61,6 +69,7 @@ public class Project {
         }
         return chat;
     }
+
 
     public void addTeamMember(User user) {
         this.teamMembers.add(user);
