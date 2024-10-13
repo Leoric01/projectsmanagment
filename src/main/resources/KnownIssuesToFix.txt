@@ -6,6 +6,7 @@ get issue by project id - muze zobrazit kdokoliv, predelat + asi vyhodit excepti
 /delete issue - check if deleter has authority (is owner, or mby admin role in User or moderator, or role editor/admin as a team member)
 pridat issue update, jde jen zmenit status nebo asigne so far
 nejede swagger, 404
+project.issue.status predelat pole na Set<Status>, vytvorit Status. Cil - kazdej projekt muze chtit vic fazi jak rozsekat ukoly, napriklad testing, evaluating apod. 3 preddefinovany statusy jsou dost omezujici
 
 / SOLVED/ everywhere i get infinite loops when fetching entity, cause they all contain another /SOLVED i guess, would require to test all services
 / SOLVED / confirm password on frontend solved, swap already have and account and login text in swapper
