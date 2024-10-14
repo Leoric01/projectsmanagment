@@ -23,5 +23,6 @@ public class AllIssueDTO {
     private LocalDate createdDate;
     private List<String> tags = new ArrayList<>();
     private UserResponseDTO assignee;
+    private UserResponseDTO reporter;
 }
 

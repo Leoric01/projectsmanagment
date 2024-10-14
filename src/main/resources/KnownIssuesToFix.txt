@@ -6,7 +6,11 @@ get issue by project id - muze zobrazit kdokoliv, predelat + asi vyhodit excepti
 /delete issue - check if deleter has authority (is owner, or mby admin role in User or moderator, or role editor/admin as a team member)
 pridat issue update, jde jen zmenit status nebo asigne so far
 nejede swagger, 404
+pridal jsem OneToOne do issue a user (reporter, reportedIssue). Overit jestli vse facha, pridat service endpoint etc
+pridavat tagy k projectu a issues
 project.issue.status predelat pole na Set<Status>, vytvorit Status. Cil - kazdej projekt muze chtit vic fazi jak rozsekat ukoly, napriklad testing, evaluating apod. 3 preddefinovany statusy jsou dost omezujici
+
+
 
 / SOLVED/ everywhere i get infinite loops when fetching entity, cause they all contain another /SOLVED i guess, would require to test all services
 / SOLVED / confirm password on frontend solved, swap already have and account and login text in swapper
@@ -16,8 +20,14 @@ project.issue.status predelat pole na Set<Status>, vytvorit Status. Cil - kazdej
 
 FE
 /ProjectDetails useEffect intellij hazi chybu, apka funguje
-/delete issue v project detailu - smaze issue ale je potreba manualne f5 aby se ukazalo
-/update issue status v issue detail - updatne, napise loading misto reset s datama
 /prtava icona v navbaru a kdyz je jmeno na 2 radky tak retardovane roztazena
 nefunguje filtr category a tags na hlavni strrance /EDIT uz funguje ale je potreba doladit
 /issue sort by status
+/issue dueDate in IssueDetails - udelat clickable a nastavit do kdy ma byt dodano
+/issue tags - clickable a pridat tag/y, pages/IssueDetails/issuedetails
+
+/ SOLVED / po pridani comentu pole zustane vyplnene | form.reset() solved
+/ SOLVED /delete issue v project detailu - smaze issue ale je potreba manualne f5 aby se ukazalo
+/ SOLVED /update issue status v issue detail - updatne, napise loading misto reset s datama
+/ SOLVED / IssueCard ln 10 swap jmeno ownera za jmeno assignee
+/ SOLVED / deleteComment smaze comment ale je potreba manualne refresh page, check filter

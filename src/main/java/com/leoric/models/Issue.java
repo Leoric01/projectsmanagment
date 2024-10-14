@@ -40,6 +40,9 @@ public class Issue {
     @ManyToOne
     private User assignee;
 
+    @OneToOne
+    private User reporter;
+
     @JsonIgnore
     @ManyToOne
     private Project project;
@@ -56,6 +59,14 @@ public class Issue {
         return null;
     }
 
+    public UserResponseDTO getReporter() {
+        if (this.reporter != null) {
+            return new UserResponseDTO(reporter.getId(), reporter.getFullName(), reporter.getEmail());
+        } else if (project != null && project.getOwner() != null) {
+            return new UserResponseDTO(project.getOwner().getId(), project.getOwner().getFullName(), project.getOwner().getEmail());
+        }
+        return null;
+    }
 
     public void removeComment(Comment comment) {
         comments.remove(comment);

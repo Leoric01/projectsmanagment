@@ -149,6 +149,12 @@ public class IssueServiceImpl implements IssueService {
                     } else {
                         issueDto.setAssignee(null);
                     }
+                    if (issue.getReporter() != null) {
+                        UserResponseDTO reporterDto = issue.getReporter();
+                        issueDto.setReporter(reporterDto);
+                    } else {
+                        issueDto.setAssignee(null);
+                    }
                     return issueDto;
                 })
                 .toList();

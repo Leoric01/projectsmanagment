@@ -29,7 +29,6 @@ public class User {
     private String email;
     private int projectSize;
 
-    //    @JsonManagedReference
     @JsonIgnore
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -40,6 +39,9 @@ public class User {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ManyToMany(mappedBy = "teamMembers", fetch = FetchType.EAGER)
     private List<Project> projects = new ArrayList<>();
+
+    @OneToOne(mappedBy = "reporter")
+    private Issue reportedIssue;
 
     public void addProject(Project project) {
         this.projects.add(project);

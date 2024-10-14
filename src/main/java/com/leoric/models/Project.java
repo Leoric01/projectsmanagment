@@ -54,7 +54,7 @@ public class Project {
 
     public void removeIssue(Issue issue) {
         this.issues.remove(issue);
-        issue.setProject(null); // Ensure that issue's reference to project is cleared
+        issue.setProject(null);
     }
 
     public Set<User> getTeamMembers() {
