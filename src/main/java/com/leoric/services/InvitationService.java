@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public interface InvitationService {
     void sendInvitation(String targetEmail, Long projectId) throws MessagingException;
 
-    Invitation acceptInvitation(String targetEmail, Long userId) throws Exception;
+    Invitation acceptInvitation(String token) throws Exception;
 
     String getTokenByUserMail(String userEmail) throws Exception;
 

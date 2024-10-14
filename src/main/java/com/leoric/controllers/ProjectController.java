@@ -144,8 +144,7 @@ public class ProjectController {
     @PostMapping("/invite")
     public ResponseEntity<MessageResponse> inviteProject(
             @RequestHeader(JWT_HEADER) String jwt,
-            @RequestBody InviteRequest request,
-            @RequestBody Project projectIn
+            @RequestBody InviteRequest request
     ) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
         invitationService.sendInvitation(request.getEmail(), request.getProjectId());
@@ -156,12 +155,9 @@ public class ProjectController {
     @GetMapping("/accept_invitation")
     public ResponseEntity<Invitation> acceptInvitation(
             @RequestHeader(JWT_HEADER) String jwt,
-            @RequestParam String token,
-            @RequestBody Project projectIn
+            @RequestParam String token
     ) throws Exception {
-        User user = userService.findUserProfileByJwt(jwt);
-        Invitation invitation = invitationService.acceptInvitation(token, user.getId());
-        projectService.addUserToProject(invitation.getProjectId(), projectIn.getId());
+        Invitation invitation = invitationService.acceptInvitation(token);
         return ResponseEntity.status(HttpStatus.OK).body(invitation);
     }
 }

@@ -1,6 +1,7 @@
 package com.leoric.services;
 
 import com.leoric.models.Invitation;
+import com.leoric.models.User;
 import com.leoric.repositories.InvitationRepository;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,8 @@ public class InvitationServiceImpl implements InvitationService {
 
     private final InvitationRepository invitationRepository;
     private final EmailService emailService;
+    private final UserService userService;
+    private final ProjectService projectService;
 
     @Override
     public void sendInvitation(String targetEmail, Long projectId) throws MessagingException {
@@ -30,12 +33,13 @@ public class InvitationServiceImpl implements InvitationService {
     }
 
     @Override
-    public Invitation acceptInvitation(String token, Long userId) throws Exception {
+    public Invitation acceptInvitation(String token) throws Exception {
         Invitation invitation = invitationRepository.findByToken(token);
         if (invitation == null) {
             throw new Exception("Invalid invitation token");
         }
-
+        User user = userService.findUserByEmail(invitation.getEmail());
+        projectService.addNewTeamMember(invitation.getProjectId(), user.getId());
         return invitation;
     }
 

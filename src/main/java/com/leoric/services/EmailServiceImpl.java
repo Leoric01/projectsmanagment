@@ -22,7 +22,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
         String subject = "Join Project Team Invitation";
-        String text = "Click to Join Project Team Invitation";
+        String text = "Click to Join Project Team Invitation: " + link;
 
         helper.setSubject(subject);
         helper.setText(text, true);
