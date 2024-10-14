@@ -25,6 +25,8 @@ nefunguje filtr category a tags na hlavni strrance /EDIT uz funguje ale je potre
 /issue sort by status
 /issue dueDate in IssueDetails - udelat clickable a nastavit do kdy ma byt dodano
 /issue tags - clickable a pridat tag/y, pages/IssueDetails/issuedetails
+/comment handleEdit prazdny, CommentCard component
+ProjectDetails button chyba, nejak opravit Dialog a Button, asChild mi neslo
 
 / SOLVED / po pridani comentu pole zustane vyplnene | form.reset() solved
 / SOLVED /delete issue v project detailu - smaze issue ale je potreba manualne f5 aby se ukazalo
