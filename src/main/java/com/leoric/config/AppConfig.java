@@ -32,6 +32,7 @@ public class AppConfig {
                 .authorizeHttpRequests(Authorize -> Authorize
                         .requestMatchers(
                                 "/auth/**",
+                                "/health/**",
                                 "/v2/api-docs",
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
@@ -58,7 +59,8 @@ public class AppConfig {
                 config.setAllowedOrigins(Arrays.asList(
                         "http://localhost:3000",
                         "http://localhost:5173",
-                        "http://localhost:4200"
+                        "http://localhost:4200",
+                        "https://projectsmanagment-production.up.railway.app/"
                 ));
                 config.setAllowedMethods(Collections.singletonList("*"));
                 config.setAllowCredentials(true);

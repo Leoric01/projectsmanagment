@@ -1,0 +1,873 @@
+{
+  "info": {
+    "_postman_id": "36ee98e9-a8c7-4a67-b372-5d34c44d7108",
+    "name": "ProjectManagment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27823556"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"fullName\": \"Name User\",\r\n    \"email\": \"em@email.com\",\r\n    \"password\": \"pass1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}auth/signup",
+              "host": [
+                "{{BASE_URL}}auth"
+              ],
+              "path": [
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"em@email.com\",\r\n    \"password\": \"pass1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}auth/signin",
+              "host": [
+                "{{BASE_URL}}auth"
+              ],
+              "path": [
+                "signin"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UserProfile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}api/users/profile",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Issue Service",
+      "item": [
+        {
+          "name": "Create Issue",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"wrwrw\",\r\n  \"projectId\": 1,\r\n  \"description\": \"Low\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/issue",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "issue"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Issues By Project Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/issue/project/1",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "issue",
+                "project",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Issue By Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/issue/4",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "issue",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Issues",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/issues",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "issues"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Issue Status",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/issue/2/?status=open",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "issue",
+                "2",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "open"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add User/Assignee to issue",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/issue/3/assignee/2",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "issue",
+                "3",
+                "assignee",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Issue By Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/issue/1",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "issue",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ProjectService",
+      "item": [
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"SECOND PROJECT\",\r\n    \"description\": \"latest technology usage\",\r\n    \"tags\": [\"Tail Wind\", \"React\", \"Nodejs\", \"Spring-boot\"],\r\n    \"category\": \"fullstack\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project By Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/1",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Projects By Tags",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/?tag=react",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "tag",
+                  "value": "react"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Projects By Category",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/?category=Backend",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Backend"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search By KeyWord",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/search/all?keyword=technology",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                "search",
+                "all"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "technology"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Project",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/search?keyword=atmo",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "atmo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Project By Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/2",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Projects By User",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/user",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Projects By Team",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Projects",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/all",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assign New User To Project By Project Id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/add/1/?newMemberId=3",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                "add",
+                "1",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "newMemberId",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ChatService",
+      "item": [
+        {
+          "name": "Get Chat",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/projects/1/chat",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "projects",
+                "1",
+                "chat"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Messages By Project Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/messages/chat/1",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "messages",
+                "chat",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"senderId\": \"1\",\r\n    \"projectId\": \"1\",\r\n    \"content\": \"reaction msg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/messages/send",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "messages",
+                "send"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comment Service",
+      "item": [
+        {
+          "name": "Add New Comment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"issueId\": 2,\r\n  \"content\": \"second comment\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/comment",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "comment"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Comments By IssueId",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/comment/1",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "comment",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comment By Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"issueId\": 2,\r\n  \"content\": \"second comment\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}api/comment/3",
+              "host": [
+                "{{BASE_URL}}api"
+              ],
+              "path": [
+                "comment",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{JWT}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}

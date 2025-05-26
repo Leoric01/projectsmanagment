@@ -17,6 +17,10 @@ import io.swagger.v3.oas.annotations.servers.Server;
         ),
         servers = {
                 @Server(
+                        description = "Prod",
+                        url = "https://projectsmanagment-production.up.railway.app/"
+                ),
+                @Server(
                         description = "Local ENV",
                         url = "http://localhost:8080"
                 )
