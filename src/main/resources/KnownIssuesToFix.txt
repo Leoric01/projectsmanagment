@@ -1,3 +1,4 @@
+
 /search - dava jen pokud je user team member nebo owner. Asi predelat, pridat boolean isProjectPublic
 stripe - nej rozchodit
 fetch EAGER - nastudovat jestli nepouzit radsi @Transactional

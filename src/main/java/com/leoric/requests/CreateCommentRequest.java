@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CreateCommentRequest {
     private Long issueId;
-
     private String content;
 }
