@@ -60,7 +60,9 @@ public class AppConfig {
                         "http://localhost:3000",
                         "http://localhost:5173",
                         "http://localhost:4200",
-                        "https://projectsmanagment-production.up.railway.app/"
+                        "http://localhost:3306",
+                        "https://projectsmanagment-production.up.railway.app",
+                        "https://projectsmanagment-fe.vercel.app"
                 ));
                 config.setAllowedMethods(Collections.singletonList("*"));
                 config.setAllowCredentials(true);
@@ -76,5 +78,4 @@ public class AppConfig {
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
